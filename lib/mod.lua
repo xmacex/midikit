@@ -16,7 +16,7 @@ local make_midi_output = function(i)
   params:set_action(n(i, "mode"), function(mode)
     if mode == 1 then
       print("cc")
-      params:show(n(i, cc))
+      params:show(n(i, "cc"))
       _menu.rebuild_params()
     else
       print("note")
