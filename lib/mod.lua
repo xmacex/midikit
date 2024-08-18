@@ -5,18 +5,18 @@ local mod = require 'core/mods'
 local matrix = require('matrix/lib/matrix')
 
 -- A utility to generate parameter values.
-local n = function(idx, name)
+local function n(idx, name)
    return "mk_"..idx.."_"..(name or "")
 end
 
 -- A utility to render MIDI device name.
-function get_midi_name(param)
+local function get_midi_name(param)
    local midi_dev = midi.connect(param.value)
    return param.value..": "..midi_dev.name
 end
 
 -- Construct a single MIDI output.
-local make_midi_output = function(i)
+local function make_midi_output(i)
   params:add_group("midi out "..i, 5)
   params:add_option(n(i, "mode"), "mode", {"cc", "note"})
   params:set_action(n(i, "mode"), function(mode)
@@ -48,7 +48,7 @@ local make_midi_output = function(i)
 end
 
 -- Initialization for a handful of MIDI destinations.
-local pre_init = function()
+local function pre_init()
     matrix:add_post_init_hook(function()
         params:add_separator("midikit")
         for i=1,4,1 do
